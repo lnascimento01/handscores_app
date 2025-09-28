@@ -1,0 +1,16 @@
+{
+  "@@locale": "en",
+  "appTitle": "Hand Scores",
+  "homeTab": "Home",
+  "competitionTab": "Competition",
+  "newsTab": "News",
+  "accountTab": "Account",
+  "liveNow": "Live Now",
+  "seeMore": "See More",
+  "score": "Score",
+  "details": "Details",
+  "ftShort": "FT",
+  "premierLeague": "Premier League",
+  "nottinghamForest": "Nottingham Forest",
+  "manUnited": "Manchester United"
+}

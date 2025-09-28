@@ -1,0 +1,21 @@
+# Flutter/Dart
+.dart_tool/
+.packages
+.pub/
+build/
+**/ios/Flutter/.last_build_id
+**/doc/api/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Android
+/android
+app.*.map.json
+app.*.symbols
+
+# VSCode/JetBrains (ajuste ao seu gosto)
+.idea/
+.vscode/
+
+# Sistema
+.DS_Store

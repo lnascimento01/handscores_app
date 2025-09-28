@@ -1,0 +1,16 @@
+{
+  "name": "HandScore Flutter (stable)",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/app",
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "dart.flutterSdkPath": "/usr/local/flutter",
+    "dart.checkForSdkUpdates": false
+  },
+  "extensions": [
+    "Dart-Code.dart-code",
+    "Dart-Code.flutter"
+  ],
+  "postCreateCommand": "flutter --version && flutter pub get || true"
+}
