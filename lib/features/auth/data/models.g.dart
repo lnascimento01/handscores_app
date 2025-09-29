@@ -10,6 +10,7 @@ _$LoginResponseImpl _$$LoginResponseImplFromJson(Map<String, dynamic> json) =>
     _$LoginResponseImpl(
       accessToken: json['access_token'] as String?,
       refreshToken: json['refresh_token'] as String?,
+      tempToken: json['temp_token'] as String?,
       expiresIn: (json['expires_in'] as num?)?.toInt(),
       mfaRequired: json['mfa_required'] as bool? ?? false,
       mfaChannels:
@@ -26,6 +27,7 @@ Map<String, dynamic> _$$LoginResponseImplToJson(_$LoginResponseImpl instance) =>
     <String, dynamic>{
       'access_token': instance.accessToken,
       'refresh_token': instance.refreshToken,
+      'temp_token': instance.tempToken,
       'expires_in': instance.expiresIn,
       'mfa_required': instance.mfaRequired,
       'mfa_channels': instance.mfaChannels,
@@ -50,3 +52,23 @@ Map<String, dynamic> _$$RegisterRequestImplToJson(
   'password': instance.password,
   'password_confirmation': instance.passwordConfirmation,
 };
+
+_$UserDtoImpl _$$UserDtoImplFromJson(Map<String, dynamic> json) =>
+    _$UserDtoImpl(
+      id: (json['id'] as num).toInt(),
+      name: json['name'] as String,
+      email: json['email'] as String,
+      avatarUrl: json['avatar_url'] as String?,
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+          const <String>[],
+    );
+
+Map<String, dynamic> _$$UserDtoImplToJson(_$UserDtoImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'email': instance.email,
+      'avatar_url': instance.avatarUrl,
+      'roles': instance.roles,
+    };

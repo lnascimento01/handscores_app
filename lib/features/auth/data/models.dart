@@ -8,6 +8,7 @@ class LoginResponse with _$LoginResponse {
   const factory LoginResponse({
     @JsonKey(name: 'access_token') String? accessToken,
     @JsonKey(name: 'refresh_token') String? refreshToken,
+    @JsonKey(name: 'temp_token') String? tempToken,
     @JsonKey(name: 'expires_in') int? expiresIn,
 
     @JsonKey(name: 'mfa_required') @Default(false) bool mfaRequired,
@@ -15,7 +16,6 @@ class LoginResponse with _$LoginResponse {
     @Default(<String>[])
     List<String> mfaChannels,
 
-    // 👇 ADICIONE ESTA LINHA
     @JsonKey(name: 'challenge_id') int? challengeId,
 
     @JsonKey(name: 'trusted_device_challenge')
@@ -39,4 +39,18 @@ class RegisterRequest with _$RegisterRequest {
 
   factory RegisterRequest.fromJson(Map<String, dynamic> json) =>
       _$RegisterRequestFromJson(json);
+}
+
+@freezed
+class UserDto with _$UserDto {
+  const factory UserDto({
+    required int id,
+    required String name,
+    required String email,
+    @JsonKey(name: 'avatar_url') String? avatarUrl,
+    @Default(<String>[]) List<String> roles,
+  }) = _UserDto;
+
+  factory UserDto.fromJson(Map<String, dynamic> json) =>
+      _$UserDtoFromJson(json);
 }

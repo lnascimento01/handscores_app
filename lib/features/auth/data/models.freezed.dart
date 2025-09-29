@@ -25,12 +25,14 @@ mixin _$LoginResponse {
   String? get accessToken => throw _privateConstructorUsedError;
   @JsonKey(name: 'refresh_token')
   String? get refreshToken => throw _privateConstructorUsedError;
+  @JsonKey(name: 'temp_token')
+  String? get tempToken => throw _privateConstructorUsedError;
   @JsonKey(name: 'expires_in')
   int? get expiresIn => throw _privateConstructorUsedError;
   @JsonKey(name: 'mfa_required')
   bool get mfaRequired => throw _privateConstructorUsedError;
   @JsonKey(name: 'mfa_channels')
-  List<String> get mfaChannels => throw _privateConstructorUsedError; // 👇 ADICIONE ESTA LINHA
+  List<String> get mfaChannels => throw _privateConstructorUsedError;
   @JsonKey(name: 'challenge_id')
   int? get challengeId => throw _privateConstructorUsedError;
   @JsonKey(name: 'trusted_device_challenge')
@@ -56,6 +58,7 @@ abstract class $LoginResponseCopyWith<$Res> {
   $Res call({
     @JsonKey(name: 'access_token') String? accessToken,
     @JsonKey(name: 'refresh_token') String? refreshToken,
+    @JsonKey(name: 'temp_token') String? tempToken,
     @JsonKey(name: 'expires_in') int? expiresIn,
     @JsonKey(name: 'mfa_required') bool mfaRequired,
     @JsonKey(name: 'mfa_channels') List<String> mfaChannels,
@@ -81,6 +84,7 @@ class _$LoginResponseCopyWithImpl<$Res, $Val extends LoginResponse>
   $Res call({
     Object? accessToken = freezed,
     Object? refreshToken = freezed,
+    Object? tempToken = freezed,
     Object? expiresIn = freezed,
     Object? mfaRequired = null,
     Object? mfaChannels = null,
@@ -96,6 +100,10 @@ class _$LoginResponseCopyWithImpl<$Res, $Val extends LoginResponse>
             refreshToken: freezed == refreshToken
                 ? _value.refreshToken
                 : refreshToken // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            tempToken: freezed == tempToken
+                ? _value.tempToken
+                : tempToken // ignore: cast_nullable_to_non_nullable
                       as String?,
             expiresIn: freezed == expiresIn
                 ? _value.expiresIn
@@ -135,6 +143,7 @@ abstract class _$$LoginResponseImplCopyWith<$Res>
   $Res call({
     @JsonKey(name: 'access_token') String? accessToken,
     @JsonKey(name: 'refresh_token') String? refreshToken,
+    @JsonKey(name: 'temp_token') String? tempToken,
     @JsonKey(name: 'expires_in') int? expiresIn,
     @JsonKey(name: 'mfa_required') bool mfaRequired,
     @JsonKey(name: 'mfa_channels') List<String> mfaChannels,
@@ -159,6 +168,7 @@ class __$$LoginResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? accessToken = freezed,
     Object? refreshToken = freezed,
+    Object? tempToken = freezed,
     Object? expiresIn = freezed,
     Object? mfaRequired = null,
     Object? mfaChannels = null,
@@ -174,6 +184,10 @@ class __$$LoginResponseImplCopyWithImpl<$Res>
         refreshToken: freezed == refreshToken
             ? _value.refreshToken
             : refreshToken // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        tempToken: freezed == tempToken
+            ? _value.tempToken
+            : tempToken // ignore: cast_nullable_to_non_nullable
                   as String?,
         expiresIn: freezed == expiresIn
             ? _value.expiresIn
@@ -206,6 +220,7 @@ class _$LoginResponseImpl implements _LoginResponse {
   const _$LoginResponseImpl({
     @JsonKey(name: 'access_token') this.accessToken,
     @JsonKey(name: 'refresh_token') this.refreshToken,
+    @JsonKey(name: 'temp_token') this.tempToken,
     @JsonKey(name: 'expires_in') this.expiresIn,
     @JsonKey(name: 'mfa_required') this.mfaRequired = false,
     @JsonKey(name: 'mfa_channels')
@@ -225,6 +240,9 @@ class _$LoginResponseImpl implements _LoginResponse {
   @JsonKey(name: 'refresh_token')
   final String? refreshToken;
   @override
+  @JsonKey(name: 'temp_token')
+  final String? tempToken;
+  @override
   @JsonKey(name: 'expires_in')
   final int? expiresIn;
   @override
@@ -239,7 +257,6 @@ class _$LoginResponseImpl implements _LoginResponse {
     return EqualUnmodifiableListView(_mfaChannels);
   }
 
-  // 👇 ADICIONE ESTA LINHA
   @override
   @JsonKey(name: 'challenge_id')
   final int? challengeId;
@@ -249,7 +266,7 @@ class _$LoginResponseImpl implements _LoginResponse {
 
   @override
   String toString() {
-    return 'LoginResponse(accessToken: $accessToken, refreshToken: $refreshToken, expiresIn: $expiresIn, mfaRequired: $mfaRequired, mfaChannels: $mfaChannels, challengeId: $challengeId, trustedDeviceChallenge: $trustedDeviceChallenge)';
+    return 'LoginResponse(accessToken: $accessToken, refreshToken: $refreshToken, tempToken: $tempToken, expiresIn: $expiresIn, mfaRequired: $mfaRequired, mfaChannels: $mfaChannels, challengeId: $challengeId, trustedDeviceChallenge: $trustedDeviceChallenge)';
   }
 
   @override
@@ -261,6 +278,8 @@ class _$LoginResponseImpl implements _LoginResponse {
                 other.accessToken == accessToken) &&
             (identical(other.refreshToken, refreshToken) ||
                 other.refreshToken == refreshToken) &&
+            (identical(other.tempToken, tempToken) ||
+                other.tempToken == tempToken) &&
             (identical(other.expiresIn, expiresIn) ||
                 other.expiresIn == expiresIn) &&
             (identical(other.mfaRequired, mfaRequired) ||
@@ -281,6 +300,7 @@ class _$LoginResponseImpl implements _LoginResponse {
     runtimeType,
     accessToken,
     refreshToken,
+    tempToken,
     expiresIn,
     mfaRequired,
     const DeepCollectionEquality().hash(_mfaChannels),
@@ -306,6 +326,7 @@ abstract class _LoginResponse implements LoginResponse {
   const factory _LoginResponse({
     @JsonKey(name: 'access_token') final String? accessToken,
     @JsonKey(name: 'refresh_token') final String? refreshToken,
+    @JsonKey(name: 'temp_token') final String? tempToken,
     @JsonKey(name: 'expires_in') final int? expiresIn,
     @JsonKey(name: 'mfa_required') final bool mfaRequired,
     @JsonKey(name: 'mfa_channels') final List<String> mfaChannels,
@@ -324,6 +345,9 @@ abstract class _LoginResponse implements LoginResponse {
   @JsonKey(name: 'refresh_token')
   String? get refreshToken;
   @override
+  @JsonKey(name: 'temp_token')
+  String? get tempToken;
+  @override
   @JsonKey(name: 'expires_in')
   int? get expiresIn;
   @override
@@ -331,7 +355,7 @@ abstract class _LoginResponse implements LoginResponse {
   bool get mfaRequired;
   @override
   @JsonKey(name: 'mfa_channels')
-  List<String> get mfaChannels; // 👇 ADICIONE ESTA LINHA
+  List<String> get mfaChannels;
   @override
   @JsonKey(name: 'challenge_id')
   int? get challengeId;
@@ -577,5 +601,260 @@ abstract class _RegisterRequest implements RegisterRequest {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RegisterRequestImplCopyWith<_$RegisterRequestImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
+  return _UserDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$UserDto {
+  int get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  @JsonKey(name: 'avatar_url')
+  String? get avatarUrl => throw _privateConstructorUsedError;
+  List<String> get roles => throw _privateConstructorUsedError;
+
+  /// Serializes this UserDto to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of UserDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $UserDtoCopyWith<UserDto> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $UserDtoCopyWith<$Res> {
+  factory $UserDtoCopyWith(UserDto value, $Res Function(UserDto) then) =
+      _$UserDtoCopyWithImpl<$Res, UserDto>;
+  @useResult
+  $Res call({
+    int id,
+    String name,
+    String email,
+    @JsonKey(name: 'avatar_url') String? avatarUrl,
+    List<String> roles,
+  });
+}
+
+/// @nodoc
+class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
+    implements $UserDtoCopyWith<$Res> {
+  _$UserDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of UserDto
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? email = null,
+    Object? avatarUrl = freezed,
+    Object? roles = null,
+  }) {
+    return _then(
+      _value.copyWith(
+            id: null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as int,
+            name: null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                      as String,
+            email: null == email
+                ? _value.email
+                : email // ignore: cast_nullable_to_non_nullable
+                      as String,
+            avatarUrl: freezed == avatarUrl
+                ? _value.avatarUrl
+                : avatarUrl // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            roles: null == roles
+                ? _value.roles
+                : roles // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
+  factory _$$UserDtoImplCopyWith(
+    _$UserDtoImpl value,
+    $Res Function(_$UserDtoImpl) then,
+  ) = __$$UserDtoImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    int id,
+    String name,
+    String email,
+    @JsonKey(name: 'avatar_url') String? avatarUrl,
+    List<String> roles,
+  });
+}
+
+/// @nodoc
+class __$$UserDtoImplCopyWithImpl<$Res>
+    extends _$UserDtoCopyWithImpl<$Res, _$UserDtoImpl>
+    implements _$$UserDtoImplCopyWith<$Res> {
+  __$$UserDtoImplCopyWithImpl(
+    _$UserDtoImpl _value,
+    $Res Function(_$UserDtoImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of UserDto
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? email = null,
+    Object? avatarUrl = freezed,
+    Object? roles = null,
+  }) {
+    return _then(
+      _$UserDtoImpl(
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as int,
+        name: null == name
+            ? _value.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        email: null == email
+            ? _value.email
+            : email // ignore: cast_nullable_to_non_nullable
+                  as String,
+        avatarUrl: freezed == avatarUrl
+            ? _value.avatarUrl
+            : avatarUrl // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        roles: null == roles
+            ? _value._roles
+            : roles // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$UserDtoImpl implements _UserDto {
+  const _$UserDtoImpl({
+    required this.id,
+    required this.name,
+    required this.email,
+    @JsonKey(name: 'avatar_url') this.avatarUrl,
+    final List<String> roles = const <String>[],
+  }) : _roles = roles;
+
+  factory _$UserDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserDtoImplFromJson(json);
+
+  @override
+  final int id;
+  @override
+  final String name;
+  @override
+  final String email;
+  @override
+  @JsonKey(name: 'avatar_url')
+  final String? avatarUrl;
+  final List<String> _roles;
+  @override
+  @JsonKey()
+  List<String> get roles {
+    if (_roles is EqualUnmodifiableListView) return _roles;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_roles);
+  }
+
+  @override
+  String toString() {
+    return 'UserDto(id: $id, name: $name, email: $email, avatarUrl: $avatarUrl, roles: $roles)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UserDtoImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.avatarUrl, avatarUrl) ||
+                other.avatarUrl == avatarUrl) &&
+            const DeepCollectionEquality().equals(other._roles, _roles));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    id,
+    name,
+    email,
+    avatarUrl,
+    const DeepCollectionEquality().hash(_roles),
+  );
+
+  /// Create a copy of UserDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UserDtoImplCopyWith<_$UserDtoImpl> get copyWith =>
+      __$$UserDtoImplCopyWithImpl<_$UserDtoImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$UserDtoImplToJson(this);
+  }
+}
+
+abstract class _UserDto implements UserDto {
+  const factory _UserDto({
+    required final int id,
+    required final String name,
+    required final String email,
+    @JsonKey(name: 'avatar_url') final String? avatarUrl,
+    final List<String> roles,
+  }) = _$UserDtoImpl;
+
+  factory _UserDto.fromJson(Map<String, dynamic> json) = _$UserDtoImpl.fromJson;
+
+  @override
+  int get id;
+  @override
+  String get name;
+  @override
+  String get email;
+  @override
+  @JsonKey(name: 'avatar_url')
+  String? get avatarUrl;
+  @override
+  List<String> get roles;
+
+  /// Create a copy of UserDto
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UserDtoImplCopyWith<_$UserDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

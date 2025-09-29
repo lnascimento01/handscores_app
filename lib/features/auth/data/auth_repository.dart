@@ -8,14 +8,26 @@ class AuthRepository {
 
   Future<void> register(RegisterRequest req) => api.register(req);
 
-  /// Faz login e retorna o LoginResponse completo (inclui mfaRequired, channels, challengeId...)
+  Future<UserDto> getCurrentUser() => api.me();
+
+  Future<bool> validateSavedSession() => api.validateSession();
+
   Future<LoginResponse> login({
     required String email,
     required String password,
+    required String deviceId,
+    required String deviceName,
+    required String platform,
   }) async {
-    final res = await api.login(email: email, password: password);
+    final res = await api.login(
+      email: email,
+      password: password,
+      deviceId: deviceId,
+      deviceName: deviceName,
+      platform: platform,
+    );
 
-    // Se o backend retornar access_token mesmo com MFA pendente (token "fraco"): salvar
+    // Salvar tokens, se vierem
     final at = res.accessToken;
     final rt = res.refreshToken;
     if (at != null && at.isNotEmpty) {
@@ -25,7 +37,6 @@ class AuthRepository {
       await SecureStore.write(SecureStore.kRefreshToken, rt);
     }
 
-    // Se exigir “trusted device” sem MFA, conclui já
     if (!res.mfaRequired && res.trustedDeviceChallenge) {
       await api.completeTrustedDevice();
     }
@@ -33,20 +44,16 @@ class AuthRepository {
     return res;
   }
 
-  /// Pede um novo challenge no canal desejado. Retorna o challengeId (ou null).
-  Future<int?> requestMfaChallenge(String channel) =>
+  Future<Object?> requestMfaChallenge(String channel) =>
       api.challenge(channel: channel);
 
-  /// Verifica MFA (com ou sem challengeId) e já salva os tokens "fortes" retornados.
   Future<void> verifyMfa(String code, {int? challengeId}) =>
       api.verifyMfa(code: code, challengeId: challengeId);
 
   Future<void> logout() async {
     try {
       await api.signOut();
-    } catch (_) {
-      // mesmo que falhe, limpamos local
-    }
+    } catch (_) {}
     await SecureStore.delete(SecureStore.kAccessToken);
     await SecureStore.delete(SecureStore.kRefreshToken);
   }
