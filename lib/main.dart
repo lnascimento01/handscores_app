@@ -202,30 +202,37 @@ class _HandScoreAppState extends State<HandScoreApp> {
                 return SplashGate(
                   useVideo: false,
                   minDuration: const Duration(milliseconds: 1500),
-                  child: Consumer(
-                    builder: (context, ref, _) {
-                      ref.listenManual(
-                        sessionControllerProvider,
-                        (_, __) {},
-                      ); // força inicialização
-                      // dispara bootstrap 1x
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        ref
-                            .read(sessionControllerProvider.notifier)
-                            .bootstrap();
-                      });
-
-                      return Stack(
-                        children: [
-                          if (child != null) child,
-                          const GlobalLoadingOverlay(),
-                          // FAB ...
-                        ],
-                      );
-                    },
+                  child: Stack(
+                    children: [
+                      if (child != null) child,
+                      const GlobalLoadingOverlay(),
+                      Positioned(
+                        right: 16,
+                        bottom: 96,
+                        child: IgnorePointer(
+                          ignoring:
+                              false, // garante receber toques mesmo com overlay
+                          child: GestureDetector(
+                            onLongPress:
+                                _setSystemTheme, // ← long-press volta para “Sistema”
+                            child: Tooltip(
+                              message: _tooltipText(context),
+                              child: FloatingActionButton.small(
+                                heroTag: 'theme-toggle',
+                                onPressed:
+                                    _toggleTheme, // ← tap alterna claro/escuro
+                                child: _buildThemeIcon(context),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 );
               },
+              maintainState: true,
+              opaque: false,
             ),
           ],
         );
